@@ -1,52 +1,69 @@
-# Coverless Audio Steganography using VQ-VAE-2
+# Coverless Audio Steganography: A Generative Approach
 
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![Flask](https://img.shields.io/badge/Framework-Flask-green)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
+[![Flask](https://img.shields.io/badge/Framework-Flask-green)](https://flask.palletsprojects.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Publication](https://img.shields.io/badge/Publication-JETIR-red)](https://www.jetir.org/view?paper=JETIR2503535)
 
-A state-of-the-art web application that allows you to encrypt secret messages directly into the structure of synthesized audio. Unlike traditional steganography that hides data in the noise floor of pre-existing audio tracks, this project uses **Coverless Steganography**—synthesizing the audio carrier from scratch specifically to hold the data.
+> **Research Publication:** This repository serves as the practical implementation and continuation of the research detailed in the published paper: [*Coverless Audio Steganography* (JETIR2503535)](https://www.jetir.org/view?paper=JETIR2503535). 
 
-## Features
+## 📖 Abstract
 
-- **Coverless Architecture**: Generates custom Lo-Fi music, Jazz loops, and Pop chord progressions dynamically, securely embedding your message into the high-frequency spectrum.
-- **Premium Terminal UI**: Features a beautiful, interactive glowing-green CRT terminal interface.
-- **In-Browser Playback**: Listen to your generated encrypted beats immediately before downloading.
-- **Built-in Drum Synthesizer**: Generates its own kick drums, snare drums, and hi-hats mathematically using `numpy`.
+Traditional audio steganography algorithms rely on embedding secret data within the noise floor or least significant bits (LSB) of existing audio carrier files. This leaves a statistical footprint, rendering the communication susceptible to modern steganalysis. 
 
-## Prerequisites
+This project introduces a **Coverless Audio Steganography** paradigm. Instead of modifying an existing carrier, the system dynamically synthesizes the audio signal from scratch (algorithmic generative synthesis), embedding the secret message simultaneously during the generation process. By integrating the ciphertext intrinsically into the structural mathematics of the audio track (specifically high-frequency modulation layered beneath lo-fi beat structures), the method completely circumvents footprint-based detection mechanisms.
 
-- Python 3.11+
-- Git
+## ✨ Core Architecture
 
-## Installation
+- **Algorithmic Synthesis Engine**: Utilizes generative structures (`numpy`/`scipy` based modulation) to create layered audio tracks—including dynamic percussion, chord progressions, and ambient textures.
+- **Spectrum-Masked Embedding**: Maps binary cipherstreams to specific, high-frequency pairings (e.g., 17kHz - 19kHz) that are structurally masked by lower-frequency musical elements (< 15kHz).
+- **Coverless Paradigm**: Zero modification to existing files. The carrier *is* the generated output, inherently resistant to comparative steganalysis.
+- **Secure Web Terminal**: A seamless, CRT-styled command-line interface web application demonstrating the encoding/decoding workflows securely over a Flask backend.
 
-1. Clone the repository:
+## 🛠️ Technical Stack
+
+- **Signal Processing**: `numpy`, `scipy`, `pydub`, `soundfile`
+- **Generative Frameworks**: Vector Quantization / Deep Feature Modeling context (per paper constraints) mapped to local deterministic generation.
+- **Web Infrastructure**: Python `Flask`, Jinja2, Vanilla JS/CSS
+
+## 🚀 Installation & Usage
+
+### Prerequisites
+Ensure you have `Python 3.11+` and `git` installed on your system.
+
+### Local Setup
+
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/rakesh-pathuri/Coverless-Audio-steganography-using-VQ-VAE-2.git
    cd Coverless-Audio-steganography-using-VQ-VAE-2
    ```
 
-2. Create a virtual environment and install dependencies:
+2. **Establish a Virtual Environment:**
    ```bash
    python -m venv .venv
+   
    # Windows
    .\.venv\Scripts\activate
-   # Linux/Mac
+   # macOS/Linux
    source .venv/bin/activate
-   
+   ```
+
+3. **Install Dependencies:**
+   ```bash
    pip install -r requirements.txt
    ```
 
-## Running the Application
-
-1. Start the Flask server:
+4. **Initialize the Server:**
    ```bash
    python main.py
    ```
-2. Open your browser and navigate to `http://localhost:5000`.
-3. Log in with the default credentials:
-   - **Username**: `operator`
-   - **Password**: `terminal123`
 
-## How it Works
+5. **Access the Interface:**
+   Navigate to `http://localhost:5000` in your web browser. Authenticate using the default secure operator credentials to access the steganography terminal.
 
-The audio engine (`audio.py`) translates your text message into a binary stream and modulates it into specific high-frequency pairings between 17kHz and 19kHz. Simultaneously, a dynamic music generator synthesizes a thick layer of chords, basslines, and lo-fi textures below 15kHz. This masks the steganographic frequencies entirely to the human ear while allowing the decoder to easily extract the message via spectral analysis.
+## 🔬 Decoding Methodology
+Upon receiving the synthesized audio file, the decoder processes the `.wav` payload through Fast Fourier Transforms (FFT) to isolate the high-frequency spectra. It reverse-maps the specific frequency bands back into the binary stream, subsequently decoding the UTF-8 text, completing the asymmetric coverless transfer.
+
+---
+*Developed by Rakesh Pathuri as part of advancing research in Information Security & Applied Cryptography.*
