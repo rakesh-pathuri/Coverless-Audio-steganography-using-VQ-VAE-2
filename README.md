@@ -13,6 +13,11 @@ Normal audio steganography algorithms hide secret data inside existing audio fil
 
 This project uses a **Coverless Audio Steganography** approach. Instead of changing an existing file, the system creates the audio from scratch and hides the secret message inside it during the generation process. Because the secret data is built into the mathematical structure of the audio itself, it avoids footprint-based detection completely.
 
+## Important Note on the User Interface (v2.0)
+
+If you are reviewing this repository alongside the original publication, please note that the web interface has been completely redesigned since the paper was published. 
+The original research utilized a standard graphical layout, whereas this updated repository features a newly upgraded **Terminal-style Command-Line Aesthetic**. The core VQ-VAE-2 synthesis and embedding algorithms remain identical to the published research; only the visual frontend has been enhanced to provide a more immersive experience.
+
 ## The VQ-VAE-2 Model
 
 The core of this research is based on the **VQ-VAE-2** (Vector Quantized Variational Autoencoder 2) architecture. 
