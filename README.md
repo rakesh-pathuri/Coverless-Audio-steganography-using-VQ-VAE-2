@@ -79,4 +79,8 @@ Make sure you have `Python 3.11+` and `git` installed on your system.
 When the receiver gets the generated `.wav` file, the decoder processes the audio using FFT (Fast Fourier Transform). It isolates the high-frequency bands, reads the binary data, and converts it back into the original text message.
 
 ---
-*Developed by Rakesh Pathuri as part of research in Information Security & Applied Cryptography.*
+### Authorship & Contributions
+
+**Lead Developer & Primary Author:** Rakesh Pathuri
+
+*While the underlying research was published as a collaborative group project, the entirety of the software architecture, the audio synthesis engine, and the web infrastructure within this repository were independently designed and built by Rakesh Pathuri.*
