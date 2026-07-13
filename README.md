@@ -24,6 +24,15 @@ The core of this research is based on the **VQ-VAE-2** (Vector Quantized Variati
 - **What it does:** VQ-VAE-2 is a deep learning model that compresses audio into discrete representations (vectors) and then reconstructs it. It generates high-quality audio by learning the hidden patterns in sound.
 - **How we use it:** In our project, VQ-VAE-2 is used to synthesize the cover audio (like lo-fi beats and instruments) dynamically. By controlling the generation process, we can securely embed secret messages into specific frequency bands (like 17kHz to 19kHz). The generated audio sounds natural to the human ear, but the hidden data can be extracted safely by the receiver.
 
+## Research Areas & Domains
+
+This project sits at the cutting-edge intersection of multiple computer science disciplines, specifically **implementing Generative AI (GenAI) for Applied Cryptography**. It practically bridges the gap between deep learning synthesis and secure communications, covering the following core domains:
+
+1. **Applied Cryptography & Steganography:** Securing ciphertext by mathematically embedding it into structural signals rather than appending it to existing data.
+2. **Generative AI (GenAI):** Using generative architectures (like VQ-VAE-2) to dynamically synthesize the audio carrier (music, lo-fi beats) from scratch.
+3. **Digital Signal Processing (DSP):** Utilizing Fast Fourier Transforms (FFT) and precise frequency modulation to manipulate and read audio spectrums at the 17kHz-19kHz ranges.
+4. **Information Security:** Creating footprint-free, undetectable communication channels that are highly resistant to modern steganalysis.
+
 ## Core Features
 
 - **Coverless Paradigm**: No existing files are modified. The audio is generated entirely from scratch to act as the carrier.
