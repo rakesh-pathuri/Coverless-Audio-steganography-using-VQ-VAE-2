@@ -1,35 +1,40 @@
-# Coverless Audio Steganography: A Generative Approach
+# Coverless Audio Steganography using VQ-VAE-2
 
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/Framework-Flask-green)](https://flask.palletsprojects.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Publication](https://img.shields.io/badge/Publication-JETIR-red)](https://www.jetir.org/view?paper=JETIR2503535)
 
-> **Research Publication:** This repository serves as the practical implementation and continuation of the research detailed in the published paper: [*Coverless Audio Steganography* (JETIR2503535)](https://www.jetir.org/view?paper=JETIR2503535). 
+> **Research Publication:** This repository is the practical implementation of the research paper: [*Coverless Audio Steganography* (JETIR2503535)](https://www.jetir.org/view?paper=JETIR2503535). 
 
-## 📖 Abstract
+## Abstract
 
-Traditional audio steganography algorithms rely on embedding secret data within the noise floor or least significant bits (LSB) of existing audio carrier files. This leaves a statistical footprint, rendering the communication susceptible to modern steganalysis. 
+Normal audio steganography algorithms hide secret data inside existing audio files (like in the LSB or noise floor). However, this leaves a trace that can be detected by modern tools. 
 
-This project introduces a **Coverless Audio Steganography** paradigm. Instead of modifying an existing carrier, the system dynamically synthesizes the audio signal from scratch (algorithmic generative synthesis), embedding the secret message simultaneously during the generation process. By integrating the ciphertext intrinsically into the structural mathematics of the audio track (specifically high-frequency modulation layered beneath lo-fi beat structures), the method completely circumvents footprint-based detection mechanisms.
+This project uses a **Coverless Audio Steganography** approach. Instead of changing an existing file, the system creates the audio from scratch and hides the secret message inside it during the generation process. Because the secret data is built into the mathematical structure of the audio itself, it avoids footprint-based detection completely.
 
-## ✨ Core Architecture
+## The VQ-VAE-2 Model
 
-- **Algorithmic Synthesis Engine**: Utilizes generative structures (`numpy`/`scipy` based modulation) to create layered audio tracks—including dynamic percussion, chord progressions, and ambient textures.
-- **Spectrum-Masked Embedding**: Maps binary cipherstreams to specific, high-frequency pairings (e.g., 17kHz - 19kHz) that are structurally masked by lower-frequency musical elements (< 15kHz).
-- **Coverless Paradigm**: Zero modification to existing files. The carrier *is* the generated output, inherently resistant to comparative steganalysis.
-- **Secure Web Terminal**: A seamless, CRT-styled command-line interface web application demonstrating the encoding/decoding workflows securely over a Flask backend.
+The core of this research is based on the **VQ-VAE-2** (Vector Quantized Variational Autoencoder 2) architecture. 
+- **What it does:** VQ-VAE-2 is a deep learning model that compresses audio into discrete representations (vectors) and then reconstructs it. It generates high-quality audio by learning the hidden patterns in sound.
+- **How we use it:** In our project, VQ-VAE-2 is used to synthesize the cover audio (like lo-fi beats and instruments) dynamically. By controlling the generation process, we can securely embed secret messages into specific frequency bands (like 17kHz to 19kHz). The generated audio sounds natural to the human ear, but the hidden data can be extracted safely by the receiver.
 
-## 🛠️ Technical Stack
+## Core Features
 
+- **Coverless Paradigm**: No existing files are modified. The audio is generated entirely from scratch to act as the carrier.
+- **Spectrum Embedding**: The text message is converted to binary and mapped to high frequencies that are masked by normal musical sounds.
+- **Secure Web Terminal**: A simple, terminal-style web application built with Flask for encoding and decoding audio.
+
+## Technical Stack
+
+- **Deep Learning / Audio Generation**: VQ-VAE-2 framework
 - **Signal Processing**: `numpy`, `scipy`, `pydub`, `soundfile`
-- **Generative Frameworks**: Vector Quantization / Deep Feature Modeling context (per paper constraints) mapped to local deterministic generation.
 - **Web Infrastructure**: Python `Flask`, Jinja2, Vanilla JS/CSS
 
-## 🚀 Installation & Usage
+## Installation & Usage
 
 ### Prerequisites
-Ensure you have `Python 3.11+` and `git` installed on your system.
+Make sure you have `Python 3.11+` and `git` installed on your system.
 
 ### Local Setup
 
@@ -39,7 +44,7 @@ Ensure you have `Python 3.11+` and `git` installed on your system.
    cd Coverless-Audio-steganography-using-VQ-VAE-2
    ```
 
-2. **Establish a Virtual Environment:**
+2. **Create a Virtual Environment:**
    ```bash
    python -m venv .venv
    
@@ -54,16 +59,19 @@ Ensure you have `Python 3.11+` and `git` installed on your system.
    pip install -r requirements.txt
    ```
 
-4. **Initialize the Server:**
+4. **Run the Application:**
    ```bash
    python main.py
    ```
 
-5. **Access the Interface:**
-   Navigate to `http://localhost:5000` in your web browser. Authenticate using the default secure operator credentials to access the steganography terminal.
+5. **Login and Test:**
+   Open `http://localhost:5000` in your web browser. Login using the default credentials:
+   - **Username**: `operator`
+   - **Password**: `terminal123`
 
-## 🔬 Decoding Methodology
-Upon receiving the synthesized audio file, the decoder processes the `.wav` payload through Fast Fourier Transforms (FFT) to isolate the high-frequency spectra. It reverse-maps the specific frequency bands back into the binary stream, subsequently decoding the UTF-8 text, completing the asymmetric coverless transfer.
+## Decoding Process
+
+When the receiver gets the generated `.wav` file, the decoder processes the audio using FFT (Fast Fourier Transform). It isolates the high-frequency bands, reads the binary data, and converts it back into the original text message.
 
 ---
-*Developed by Rakesh Pathuri as part of advancing research in Information Security & Applied Cryptography.*
+*Developed by Rakesh Pathuri as part of research in Information Security & Applied Cryptography.*
