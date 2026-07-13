@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="stream">
+    <div class="line">PS D:\Audio Steganography Using VQ-VAE-2&gt; whoami</div>
+    <div class="line">{{ session.get('username') }}</div>
+    <div class="line blank"></div>
+    <div class="line">PS D:\Audio Steganography Using VQ-VAE-2&gt; select mode</div>
+    <div class="command-list">
+        <a class="command-link" href="{{ url_for('encrypt') }}">encode</a>
+        <a class="command-link" href="{{ url_for('decrypt') }}">decode</a>
+        <a class="command-link" href="{{ url_for('logout') }}">logout</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="stream">
+    <div class="line">PS D:\Audio Steganography Using VQ-VAE-2&gt; decode</div>
+    <form id="decryptForm" action="{{ url_for('decrypt') }}" method="post" enctype="multipart/form-data" class="cli-form" onsubmit="showLoading()">
+        <label class="cli-row">
+            <span class="prompt">file:</span>
+            <input class="cli-input" type="file" id="file" name="file" accept=".wav" required>
+        </label>
+        <div class="cli-row">
+            <span class="prompt">command:</span>
+            <button class="cli-button" type="submit">run decode</button>
+        </div>
+    </form>
+    <div id="loading" class="line" hidden>processing...</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function showLoading() {
+        document.getElementById('decryptForm').hidden = true;
+        document.getElementById('loading').hidden = false;
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="stream">
+    <div class="line">PS D:\Audio Steganography Using VQ-VAE-2&gt; decode</div>
+    <div class="line">status: complete</div>
+    <div class="line blank"></div>
+    <pre id="message-text" class="output">{{ message }}</pre>
+    <div class="command-list">
+        <button id="copy-btn" class="cli-button" type="button" onclick="copyMessage()">copy</button>
+        <a class="command-link" href="{{ url_for('decrypt') }}">decode again</a>
+        <a class="command-link" href="{{ url_for('index') }}">home</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function copyMessage() {
+        const messageText = document.getElementById('message-text').innerText;
+        navigator.clipboard.writeText(messageText).then(() => {
+            const button = document.getElementById('copy-btn');
+            const originalText = button.textContent;
+            button.textContent = 'copied';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 1800);
+        });
+    }
+</script>
+{% endblock %}

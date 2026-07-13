@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Share+Tech+Mono&display=swap');
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+    background: #050505;
+    background-image: radial-gradient(circle at center, #0a0f0a 0%, #000000 100%);
+    color: #00ff41;
+    font-family: 'Fira Code', 'Share Tech Mono', 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.4);
+}
+
+/* CRT Scanline Effect */
+body::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: #00ff41;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #fff;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    position: relative;
+    z-index: 3;
+}
+
+.terminal-window {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.terminal-header {
+    padding: 12px 18px;
+    background: rgba(0, 255, 65, 0.1);
+    color: #00ff41;
+    border: 1px solid #00ff41;
+    border-bottom: none;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: inset 0 0 10px rgba(0,255,65,0.2);
+}
+
+.terminal-screen {
+    flex: 1;
+    padding: 24px;
+    background: rgba(0, 10, 0, 0.6);
+    border: 1px solid #00ff41;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.1), inset 0 0 15px rgba(0, 255, 65, 0.05);
+    backdrop-filter: blur(4px);
+}
+
+.stream {
+    display: grid;
+    gap: 12px;
+}
+
+.line {
+    white-space: pre-wrap;
+    color: #00ff41;
+}
+
+.blank {
+    min-height: 12px;
+}
+
+.error {
+    color: #ff3333;
+    text-shadow: 0 0 8px rgba(255, 51, 51, 0.6);
+}
+
+.cli-form {
+    display: grid;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.cli-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.cli-block {
+    display: grid;
+    gap: 8px;
+}
+
+.prompt,
+.meta {
+    color: #88ffaa;
+    font-weight: 500;
+}
+
+.meta {
+    text-align: right;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.cli-input,
+.cli-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(0, 20, 0, 0.4);
+    color: #00ff41;
+    border: 1px solid #005511;
+    outline: none;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.cli-input:focus,
+.cli-textarea:focus {
+    border-color: #00ff41;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    background: rgba(0, 30, 0, 0.6);
+}
+
+.cli-textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.cli-button,
+.command-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    padding: 0 24px;
+    background: transparent;
+    color: #00ff41;
+    border: 1px solid #00ff41;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.cli-button:hover,
+.command-link:hover {
+    background: #00ff41;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+}
+
+.command-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.output {
+    margin: 0;
+    padding: 0;
+    white-space: pre-wrap;
+    color: #00ff41;
+}
+
+/* Animations */
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.step-line {
+    opacity: 0;
+    transform: translateY(5px);
+    animation: fadeUp 0.4s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 720px) {
+    .terminal-screen {
+        padding: 16px;
+    }
+
+    .cli-row {
+        grid-template-columns: 1fr;
+    }
+
+    .command-list {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .cli-button, .command-link {
+        width: 100%;
+    }
+}

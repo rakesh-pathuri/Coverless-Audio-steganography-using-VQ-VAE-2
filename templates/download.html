@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="stream">
+    <div class="line">PS D:\Audio Steganography Using VQ-VAE-2&gt; encode</div>
+    <div class="line">status: complete</div>
+    <div class="line">file: {{ filename }}</div>
+    <div class="line">seed: {{ seed or 'auto' }}</div>
+    <div class="line blank"></div>
+    <div class="cli-row" style="grid-template-columns: 1fr; margin-bottom: 20px;">
+        <audio controls autoplay style="width: 100%; border-radius: 4px;">
+            <source src="{{ url_for('stream', filename=filename) }}" type="audio/{{ filename.split('.')[-1] }}">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <div class="command-list">
+        <a class="command-link" href="{{ url_for('download', filename=filename) }}">download</a>
+        <a class="command-link" href="{{ url_for('encrypt') }}">redo</a>
+        <a class="command-link" href="{{ url_for('index') }}">home</a>
+    </div>
+</div>
+{% endblock %}

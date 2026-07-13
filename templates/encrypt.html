@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="stream">
+    <div class="line">PS D:\Audio Steganography Using VQ-VAE-2&gt; access secure audio terminal</div>
+    <form id="encryptForm" method="post" class="cli-form" onsubmit="showLoading()">
+        <label class="cli-row">
+            <span class="prompt">message:</span>
+            <textarea class="cli-textarea" id="message" name="message" maxlength="1200" required></textarea>
+            <span class="meta" id="charCount">0 / 1200</span>
+        </label>
+        <label class="cli-row">
+            <span class="prompt">instrument:</span>
+            <select class="cli-input" id="instrument" name="instrument">
+                <option value="piano">piano</option>
+                <option value="organ">organ</option>
+                <option value="bell">bell</option>
+                <option value="pluck">pluck</option>
+                <option value="pad" selected>pad</option>
+                <option value="synth">synth</option>
+            </select>
+        </label>
+        <label class="cli-row">
+            <span class="prompt">timbre:</span>
+            <select class="cli-input" id="timbre_mode" name="timbre_mode">
+                <option value="single" selected>single</option>
+                <option value="cycle">cycle</option>
+                <option value="random">random</option>
+            </select>
+        </label>
+        <label class="cli-row">
+            <span class="prompt">genre:</span>
+            <select class="cli-input" id="genre" name="genre">
+                <option value="pop" selected>pop</option>
+                <option value="jazz">jazz</option>
+                <option value="lofi">lofi</option>
+                <option value="classical">classical</option>
+            </select>
+        </label>
+        <label class="cli-row">
+            <span class="prompt">format:</span>
+            <select class="cli-input" id="output_format" name="output_format">
+                <option value="wav" selected>wav</option>
+                <option value="mp3">mp3</option>
+                <option value="flac">flac</option>
+                <option value="ogg">ogg</option>
+            </select>
+        </label>
+        <label class="cli-row">
+            <span class="prompt">seed (optional):</span>
+            <input class="cli-input" type="number" id="seed" name="seed">
+        </label>
+        <div class="cli-row">
+            <span class="prompt">command:</span>
+            <button class="cli-button" type="submit">run encode</button>
+        </div>
+    </form>
+    <div id="loading" hidden>
+        <div class="line">Initiating secure protocol...</div>
+        <div id="progress-container"></div>
+        <div class="line blink" id="cursor-line">_</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const messageEl = document.getElementById('message');
+    const countEl = document.getElementById('charCount');
+
+    messageEl.addEventListener('input', () => {
+        countEl.textContent = `${messageEl.value.length} / 1200`;
+    });
+
+    function showLoading() {
+        document.getElementById('encryptForm').hidden = true;
+        document.getElementById('loading').hidden = false;
+        
+        const container = document.getElementById('progress-container');
+        const steps = [
+            "[+] Initializing VQ-VAE-2 latent space...",
+            "[+] Preparing psychoacoustic frequency masks...",
+            "[+] Synthesizing Lo-Fi drum transients...",
+            "[+] Generating lush pad progressions...",
+            "[+] Embedding secure message bits...",
+            "[+] Applying vinyl textures and low-pass filters...",
+            "[+] Finalizing high-quality audio mix..."
+        ];
+        
+        let i = 0;
+        function showNextStep() {
+            if (i < steps.length) {
+                const stepEl = document.createElement('div');
+                stepEl.className = 'line step-line';
+                stepEl.textContent = steps[i];
+                container.appendChild(stepEl);
+                i++;
+                
+                window.scrollTo(0, document.body.scrollHeight);
+                
+                // Random delay between 400ms and 1200ms for realistic terminal feel
+                setTimeout(showNextStep, Math.floor(Math.random() * 800) + 400);
+            } else {
+                const finalEl = document.createElement('div');
+                finalEl.className = 'line step-line';
+                finalEl.style.color = '#fff';
+                finalEl.textContent = "[*] Waiting for server response...";
+                container.appendChild(finalEl);
+                
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+        }
+        
+        setTimeout(showNextStep, 500);
+    }
+</script>
+{% endblock %}
