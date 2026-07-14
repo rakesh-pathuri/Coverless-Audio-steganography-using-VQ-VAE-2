@@ -33,6 +33,23 @@ This project sits at the cutting-edge intersection of multiple computer science 
 3. **Digital Signal Processing (DSP):** Utilizing Fast Fourier Transforms (FFT) and precise frequency modulation to manipulate and read audio spectrums at the 17kHz-19kHz ranges.
 4. **Information Security:** Creating footprint-free, undetectable communication channels that are highly resistant to modern steganalysis.
 
+## Project Architecture
+
+### Visual Flow
+
+```mermaid
+graph TD
+    A[Secret Text] -->|Binary Conversion| B(Encoder)
+    C[VQ-VAE-2 Base Audio] -->|FFT Processing| B
+    B -->|High Frequency Injection| D[Stego Audio .wav]
+    D -->|Transmission| E(Decoder)
+    E -->|Spectrum Extraction| F[Secret Text Recovered]
+    
+    style B fill:#8338ec,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#ff006e,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#3a86ff,stroke:#333,stroke-width:2px,color:#fff
+```
+
 ## Core Features
 
 - **Coverless Paradigm**: No existing files are modified. The audio is generated entirely from scratch to act as the carrier.
